@@ -4,66 +4,43 @@
 
 @layer base {
   :root {
-    /* Light Mode (MS Word Fluent UI matching) */
-    --bg-app: #FFFFFF;
+    --bg-app: #F3F2F1;
     --bg-document: #FFFFFF;
-    --bg-desk: #F3F2F1;
-    --toolbar-bg: #FFFFFF;
-    --toolbar-border: #E1DFDD;
-    --toolbar-hover: #F3F2F1;
-    --text-dark: #242424;
-    --text-document: #000000;
-    --text-muted: #605E5C;
-  }
-  
-  .dark {
-    /* Dark Mode */
-    --bg-app: #0F1117;
-    --bg-document: #FFFFFF;
-    --bg-desk: #2A2D3A;
-    --toolbar-bg: #1A1D26;
-    --toolbar-border: #2A2D3A;
-    --toolbar-hover: #2A2D3A;
-    --text-dark: #E0E0E0;
-    --text-document: #1C1C1C;
-    --text-muted: #888888;
+    --text-main: #323130;
+    --accent-gold: #C9973A;
+    --accent-teal: #1A7A6E;
   }
 
   body {
-    @apply bg-background-app text-text-dark font-sans overflow-hidden m-0 p-0 transition-colors duration-200;
+    @apply bg-[#F3F2F1] text-[#323130] overflow-hidden m-0 p-0;
+    font-family: 'Inter', 'Noto Sans Sinhala', sans-serif;
   }
 }
 
 @layer utilities {
-  .document-shadow {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-  
-  .dialect-highlight {
-    background-color: rgba(255, 215, 0, 0.25);
-    text-decoration: underline;
-    text-decoration-color: #FFD700;
-    text-decoration-style: wavy;
-    text-underline-offset: 4px;
-    cursor: pointer;
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-  
-  .key-press:active {
-    transform: scale(0.95);
-  }
+}
 
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--toolbar-bg);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--toolbar-border);
-    border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #C9973A;
-  }
+.ProseMirror {
+  outline: none !important;
+}
+
+.ProseMirror p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Custom TipTap Styles */
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
 }

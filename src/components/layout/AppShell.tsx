@@ -1,0 +1,27 @@
+import React from 'react';
+import TopBar from './TopBar';
+import Ribbon from './Ribbon';
+import EditorArea from './EditorArea';
+import StatusBar from './StatusBar';
+import SidePanelManager from '../panels/SidePanelManager';
+import { useAppStore } from '../../store/useAppStore';
+
+const AppShell: React.FC = () => {
+  const { isKeyboardOpen } = useAppStore();
+
+  return (
+    <div className="h-screen w-screen flex flex-col overflow-hidden bg-[#F3F2F1] text-[#323130] font-sans">
+      <TopBar />
+      <Ribbon />
+      
+      <div className="flex-1 flex overflow-hidden relative">
+        <EditorArea />
+        <SidePanelManager />
+      </div>
+
+      <StatusBar />
+    </div>
+  );
+};
+
+export default AppShell;
