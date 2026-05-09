@@ -27,11 +27,11 @@ import {
 import { useAppStore } from '../../../store/useAppStore';
 
 const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1">
-    <div className="flex-1 flex items-center gap-1">
+  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1 flex-shrink-0">
+    <div className="flex-1 flex items-center gap-0.5">
       {children}
     </div>
-    <div className="text-[9px] text-gray-400 text-center mt-auto uppercase tracking-tighter">
+    <div className="text-[9px] text-gray-400 text-center mt-1 uppercase tracking-tighter select-none">
       {label}
     </div>
   </div>
@@ -65,7 +65,7 @@ const HomeTab: React.FC = () => {
     <div className="flex h-full items-center">
       <RibbonGroup label="Clipboard">
         <IconButton icon={Clipboard} label="Paste" large />
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full justify-center">
           <IconButton icon={MousePointer2} label="Cut" />
           <IconButton icon={MousePointer2} label="Copy" />
         </div>
@@ -146,7 +146,7 @@ const HomeTab: React.FC = () => {
       </RibbonGroup>
 
       <RibbonGroup label="Editing">
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full justify-center">
           <IconButton icon={Search} label="Find" />
           <IconButton icon={Replace} label="Replace" />
           <IconButton 

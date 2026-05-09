@@ -15,11 +15,11 @@ import {
 } from 'lucide-react';
 
 const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1">
-    <div className="flex-1 flex items-center gap-1">
+  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1 flex-shrink-0">
+    <div className="flex-1 flex items-center gap-0.5">
       {children}
     </div>
-    <div className="text-[9px] text-gray-400 text-center mt-auto uppercase tracking-tighter">
+    <div className="text-[9px] text-gray-400 text-center mt-1 uppercase tracking-tighter select-none">
       {label}
     </div>
   </div>
@@ -51,7 +51,7 @@ const ViewTab: React.FC = () => {
       <RibbonGroup label="Zoom">
         <IconButton icon={Search} label="Zoom" large />
         <IconButton icon={ZoomIn} label="100%" />
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full justify-center">
           <IconButton icon={Layout} label="One Page" />
           <IconButton icon={Copy} label="Two Pages" />
         </div>

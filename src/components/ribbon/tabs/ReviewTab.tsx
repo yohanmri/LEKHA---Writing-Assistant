@@ -13,11 +13,11 @@ import {
 } from 'lucide-react';
 
 const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1">
-    <div className="flex-1 flex items-center gap-1">
+  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1 flex-shrink-0">
+    <div className="flex-1 flex items-center gap-0.5">
       {children}
     </div>
-    <div className="text-[9px] text-gray-400 text-center mt-auto uppercase tracking-tighter">
+    <div className="text-[9px] text-gray-400 text-center mt-1 uppercase tracking-tighter select-none">
       {label}
     </div>
   </div>
@@ -41,7 +41,7 @@ const ReviewTab: React.FC = () => {
 
       <RibbonGroup label="Comments">
         <IconButton icon={MessageSquare} label="New Comment" large />
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full justify-center">
           <IconButton icon={ChevronLeft} label="Previous" />
           <IconButton icon={ChevronRight} label="Next" />
         </div>
@@ -50,7 +50,7 @@ const ReviewTab: React.FC = () => {
 
       <RibbonGroup label="Tracking">
         <IconButton icon={History} label="Track Changes" large />
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full justify-center">
           <IconButton icon={Check} label="Accept" />
           <IconButton icon={X} label="Reject" />
         </div>
