@@ -1,62 +1,113 @@
 import React from 'react';
-import { RefreshCw, MapPin, PanelRightOpen, BookMarked, Settings } from 'lucide-react';
+import {
+  RefreshCw, MapPin, PanelRightOpen, BookMarked, Settings,
+  Languages, ArrowLeftRight, ToggleLeft, Check, X,
+  SlidersHorizontal, Lightbulb, Globe2, BookOpen
+} from 'lucide-react';
+import { RibbonGroup, SinhalaBtn, SplitLargeBtn, LargeBtn, DropBtn } from '../RibbonComponents';
 import { useAppStore } from '../../../store/useAppStore';
-
-const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1">
-    <div className="flex-1 flex items-center gap-1">
-      {children}
-    </div>
-    <div className="text-[9px] text-gray-400 text-center mt-auto uppercase tracking-tighter">
-      {label}
-    </div>
-  </div>
-);
-
-const IconButton: React.FC<{ icon: React.ElementType; label?: string; onClick?: () => void; active?: boolean; large?: boolean }> = ({ icon: Icon, label, onClick, active, large }) => (
-  <button 
-    onClick={onClick}
-    className={`
-      flex flex-col items-center justify-center rounded px-2 py-1 transition-colors min-w-[64px] h-full
-      ${active ? 'bg-green-50 text-[#1A7A6E]' : 'hover:bg-gray-100 text-gray-700'}
-    `}
-  >
-    <Icon size={large ? 28 : 24} strokeWidth={1.5} className={large ? 'text-[#1A7A6E]' : ''} />
-    {label && <span className="text-[10px] mt-0.5 whitespace-nowrap">{label}</span>}
-  </button>
-);
 
 const DialectTab: React.FC = () => {
   const { sidePanel, setSidePanel } = useAppStore();
 
   return (
-    <div className="flex h-full items-center">
-      <RibbonGroup label="Conversion">
-        <IconButton icon={RefreshCw} label="Convert All" large />
-        <div className="flex flex-col gap-1 mx-2">
-          <select className="text-[10px] border border-gray-200 rounded px-1 py-0.5 outline-none w-24">
-            <option>Colombo</option>
-            <option>Galle</option>
-            <option>Kandy</option>
-            <option>Matara</option>
-          </select>
-          <div className="flex items-center gap-1">
-            <input type="checkbox" id="auto" className="w-3 h-3" />
-            <label htmlFor="auto" className="text-[9px] text-gray-500">Auto Convert</label>
-          </div>
+    <div className="flex h-full items-center overflow-x-auto">
+
+      {/* STATUS BADGE */}
+      <div className="flex flex-col justify-center px-3 h-full border-r border-gray-200">
+        <div className="bg-green-50 border border-green-200 text-[#1A7A6E] px-2 py-1 rounded text-[10px] font-bold flex items-center gap-1.5">
+          <Globe2 size={12} />
+          <span>DIALECT CONVERTER ACTIVE</span>
         </div>
-        <IconButton 
-          icon={PanelRightOpen} 
-          label="Dialect Panel" 
+      </div>
+
+      {/* CONVERSION */}
+      <RibbonGroup label="Conversion">
+        <SplitLargeBtn icon={RefreshCw} label="Convert All" items={[
+          { label: 'Convert Full Document' },
+          { label: 'Convert Selection Only' },
+          { label: 'Convert Paragraph' },
+          { divider: true },
+          { label: 'Preview Conversion...' },
+          { label: 'Undo Last Conversion' },
+        ]} color="#1A7A6E" />
+        <SinhalaBtn
+          icon={PanelRightOpen}
+          label="Dialect Panel"
           onClick={() => setSidePanel(sidePanel === 'dialect' ? null : 'dialect')}
           active={sidePanel === 'dialect'}
         />
+        <div className="flex flex-col gap-1 px-1 justify-center h-full">
+          <div className="text-[10px] text-gray-500">Source Dialect:</div>
+          <DropBtn label="Auto-detect" items={[
+            { label: 'Auto-detect' },
+            { label: 'Standard (Colombo)' },
+            { label: 'Southern (Galle/Matara)' },
+            { label: 'Kandyan (Kandy)' },
+            { label: 'Northern (Jaffna)' },
+            { label: 'Low-country' },
+          ]} />
+          <div className="text-[10px] text-gray-500 mt-0.5">Target Dialect:</div>
+          <DropBtn label="Standard Sinhala" items={[
+            { label: 'Standard (ප්‍රමිත)' },
+            { label: 'Colombo (කොළඹ)' },
+            { label: 'Galle (ගාල්ල)' },
+            { label: 'Kandy (කන්ඩේ)' },
+            { label: 'Matara (මාතර)' },
+            { label: 'Jaffna (යාපනය)' },
+          ]} />
+        </div>
       </RibbonGroup>
 
-      <RibbonGroup label="Dictionary">
-        <IconButton icon={BookMarked} label="Add to Dict" />
-        <IconButton icon={Settings} label="Manage" />
+      {/* REGISTER */}
+      <RibbonGroup label="Register">
+        <div className="flex flex-col gap-1 px-1 justify-center h-full">
+          <DropBtn label="Formal ↔ Informal" items={[
+            { label: 'Keep Original' },
+            { label: 'Formal (ලිඛිත)' },
+            { label: 'Informal (කතා)' },
+            { label: 'Literary (සාහිත්‍ය)' },
+            { label: 'Religious (ආගමික)' },
+            { label: 'News (පුවත්)' },
+          ]} />
+          <DropBtn label="Script: Standard" items={[
+            { label: 'Standard Sinhala Script' },
+            { label: 'Colloquial Script' },
+            { label: 'Archaic Script' },
+          ]} />
+          <div className="flex items-center gap-1 mt-1">
+            <input type="checkbox" id="autoConv" className="w-3 h-3 accent-[#1A7A6E]" />
+            <label htmlFor="autoConv" className="text-[10px] text-gray-500">Auto-convert as you type</label>
+          </div>
+          <div className="flex items-center gap-1">
+            <input type="checkbox" id="showDiff" defaultChecked className="w-3 h-3 accent-[#1A7A6E]" />
+            <label htmlFor="showDiff" className="text-[10px] text-gray-500">Highlight changes</label>
+          </div>
+        </div>
       </RibbonGroup>
+
+      {/* DICTIONARY */}
+      <RibbonGroup label="Dictionary">
+        <SinhalaBtn icon={BookMarked} label="Add to Dictionary" />
+        <SplitLargeBtn icon={BookOpen} label="Manage Dict" items={[
+          { label: 'View Custom Dictionary' },
+          { label: 'Add Word...' },
+          { label: 'Remove Word...' },
+          { divider: true },
+          { label: 'Import Dictionary...' },
+          { label: 'Export Dictionary...' },
+          { label: 'Reset to Default' },
+        ]} color="#1A7A6E" />
+        <SinhalaBtn icon={MapPin} label="Regional Words" />
+      </RibbonGroup>
+
+      {/* AI */}
+      <RibbonGroup label="AI Tools">
+        <SinhalaBtn icon={Lightbulb} label="Smart Convert" />
+        <SinhalaBtn icon={Languages} label="Transliterate" />
+        <SinhalaBtn icon={SlidersHorizontal} label="Settings" />
+      </RibbonGroup>
+
     </div>
   );
 };

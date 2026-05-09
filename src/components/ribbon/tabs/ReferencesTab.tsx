@@ -1,55 +1,110 @@
 import React from 'react';
-import { 
-  FileText, 
-  PlusSquare, 
-  RefreshCw, 
-  Quote, 
-  Library, 
-  Hash,
-  BookOpen
+import {
+  FileText, PlusCircle, RefreshCw, ChevronDown,
+  MessageSquarePlus, ArrowDownToLine, Navigation,
+  Quote, Library, BookOpen, Globe2,
+  Hash, BookMarked, List,
+  Footprints, Superscript,
 } from 'lucide-react';
-
-const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1">
-    <div className="flex-1 flex items-center gap-1">
-      {children}
-    </div>
-    <div className="text-[9px] text-gray-400 text-center mt-auto uppercase tracking-tighter">
-      {label}
-    </div>
-  </div>
-);
-
-const IconButton: React.FC<{ icon: React.ElementType; label?: string; large?: boolean }> = ({ icon: Icon, label, large }) => (
-  <button className={`flex flex-col items-center justify-center hover:bg-gray-100 rounded px-1.5 transition-colors ${large ? 'h-full min-w-[48px]' : 'h-8'}`}>
-    <Icon size={large ? 24 : 18} strokeWidth={large ? 1.5 : 2} className="text-gray-700" />
-    {label && <span className="text-[10px] mt-0.5 text-gray-600">{label}</span>}
-  </button>
-);
+import { RibbonGroup, LargeBtn, SmallBtn, SplitLargeBtn, DropBtn } from '../RibbonComponents';
 
 const ReferencesTab: React.FC = () => {
   return (
-    <div className="flex h-full items-center">
+    <div className="flex h-full items-center overflow-x-auto">
+
+      {/* TABLE OF CONTENTS */}
       <RibbonGroup label="Table of Contents">
-        <IconButton icon={FileText} label="Contents" large />
-        <IconButton icon={PlusSquare} label="Add Text" />
-        <IconButton icon={RefreshCw} label="Update" />
+        <SplitLargeBtn icon={FileText} label="Table of Contents" items={[
+          { label: 'Automatic Table 1' },
+          { label: 'Automatic Table 2' },
+          { label: 'Manual Table' },
+          { divider: true },
+          { label: 'Custom Table of Contents...' },
+          { label: 'Remove Table of Contents' },
+          { label: 'Save Selection to Gallery...' },
+        ]} />
+        <div className="flex flex-col h-full justify-center">
+          <SplitLargeBtn icon={PlusCircle} label="Add Text" items={[
+            { label: 'Do Not Show in Table' },
+            { label: 'Level 1' },
+            { label: 'Level 2' },
+            { label: 'Level 3' },
+          ]} />
+          <LargeBtn icon={RefreshCw} label="Update Table" />
+        </div>
       </RibbonGroup>
 
+      {/* FOOTNOTES */}
       <RibbonGroup label="Footnotes">
-        <IconButton icon={PlusSquare} label="Insert Footnote" large />
-        <IconButton icon={PlusSquare} label="Insert Endnote" />
+        <LargeBtn icon={MessageSquarePlus} label="Insert Footnote" />
+        <LargeBtn icon={ArrowDownToLine} label="Insert Endnote" />
+        <div className="flex flex-col h-full justify-center">
+          <SplitLargeBtn icon={Navigation} label="Next Footnote" items={[
+            { label: 'Next Footnote' },
+            { label: 'Previous Footnote' },
+            { label: 'Next Endnote' },
+            { label: 'Previous Endnote' },
+          ]} />
+          <LargeBtn icon={Footprints} label="Show Notes" />
+        </div>
       </RibbonGroup>
 
-      <RibbonGroup label="Citations">
-        <IconButton icon={Quote} label="Insert Citation" large />
-        <IconButton icon={Library} label="Manage Sources" />
+      {/* CITATIONS & BIBLIOGRAPHY */}
+      <RibbonGroup label="Citations & Bibliography">
+        <SplitLargeBtn icon={Quote} label="Insert Citation" items={[
+          { label: 'Add New Source...' },
+          { label: 'Add New Placeholder...' },
+          { label: 'Search Libraries...' },
+        ]} />
+        <LargeBtn icon={Library} label="Manage Sources" />
+        <div className="flex flex-col gap-1 px-1">
+          <DropBtn label="APA" className="" items={[
+            { label: 'APA' },
+            { label: 'MLA' },
+            { label: 'Chicago' },
+            { label: 'ISO 690' },
+            { label: 'GOST' },
+            { label: 'Turabian' },
+            { label: 'Vancouver' },
+          ]} />
+          <SplitLargeBtn icon={BookOpen} label="Bibliography" items={[
+            { label: 'Bibliography' },
+            { label: 'References' },
+            { label: 'Works Cited' },
+            { divider: true },
+            { label: 'Insert Bibliography' },
+          ]} />
+        </div>
       </RibbonGroup>
 
+      {/* CAPTIONS */}
+      <RibbonGroup label="Captions">
+        <LargeBtn icon={Hash} label="Insert Caption" />
+        <div className="flex flex-col h-full justify-center">
+          <LargeBtn icon={List} label="Table of Figures" />
+          <LargeBtn icon={RefreshCw} label="Update Table" />
+          <LargeBtn icon={Navigation} label="Cross-reference" />
+        </div>
+      </RibbonGroup>
+
+      {/* INDEX */}
       <RibbonGroup label="Index">
-        <IconButton icon={Hash} label="Mark Entry" />
-        <IconButton icon={BookOpen} label="Insert Index" />
+        <LargeBtn icon={BookMarked} label="Mark Entry" />
+        <div className="flex flex-col h-full justify-center">
+          <LargeBtn icon={List} label="Insert Index" />
+          <LargeBtn icon={RefreshCw} label="Update Index" />
+        </div>
       </RibbonGroup>
+
+      {/* TABLE OF AUTHORITIES */}
+      <RibbonGroup label="Table of Authorities">
+        <LargeBtn icon={BookMarked} label="Mark Citation" />
+        <div className="flex flex-col h-full justify-center">
+          <LargeBtn icon={List} label="Insert Table" />
+          <LargeBtn icon={RefreshCw} label="Update Table" />
+        </div>
+      </RibbonGroup>
+
     </div>
   );
 };
