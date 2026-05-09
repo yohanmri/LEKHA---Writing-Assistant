@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+geosync-sinhala-writing-assistant/
+node_modules/
+dist/
