@@ -7,6 +7,8 @@ interface AppState {
   setSidePanel: (panel: 'synonyms' | 'grammar' | 'dialect' | null) => void;
   isKeyboardOpen: boolean;
   toggleKeyboard: () => void;
+  isLeftPanelCollapsed: boolean;
+  toggleLeftPanel: () => void;
   documentTitle: string;
   setDocumentTitle: (title: string) => void;
   saveStatus: 'saved' | 'unsaved' | 'saving';
@@ -22,6 +24,8 @@ export const useAppStore = create<AppState>((set) => ({
   setSidePanel: (panel) => set({ sidePanel: panel }),
   isKeyboardOpen: false,
   toggleKeyboard: () => set((state) => ({ isKeyboardOpen: !state.isKeyboardOpen })),
+  isLeftPanelCollapsed: false,
+  toggleLeftPanel: () => set((state) => ({ isLeftPanelCollapsed: !state.isLeftPanelCollapsed })),
   documentTitle: 'ලේඛා ලියවිල්ල',
   setDocumentTitle: (title) => set({ documentTitle: title }),
   saveStatus: 'saved',

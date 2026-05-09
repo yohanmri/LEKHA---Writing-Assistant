@@ -1,34 +1,29 @@
 import React from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import FontFamily from '@tiptap/extension-font-family';
-import TextStyle from '@tiptap/extension-text-style';
-import Color from '@tiptap/extension-color';
-import Highlight from '@tiptap/extension-highlight';
-import TextAlign from '@tiptap/extension-text-align';
-import Underline from '@tiptap/extension-underline';
-import Subscript from '@tiptap/extension-subscript';
-import Superscript from '@tiptap/extension-superscript';
-import Link from '@tiptap/extension-link';
-import Image from '@tiptap/extension-image';
-import Table from '@tiptap/extension-table';
-import TableRow from '@tiptap/extension-table-row';
-import TableCell from '@tiptap/extension-table-cell';
-import TableHeader from '@tiptap/extension-table-header';
-import History from '@tiptap/extension-history';
-import Placeholder from '@tiptap/extension-placeholder';
-import CharacterCount from '@tiptap/extension-character-count';
+import { FontFamily } from '@tiptap/extension-font-family';
+import { TextStyle } from '@tiptap/extension-text-style';
+import { Color } from '@tiptap/extension-color';
+import { Highlight } from '@tiptap/extension-highlight';
+import { TextAlign } from '@tiptap/extension-text-align';
+import { Subscript } from '@tiptap/extension-subscript';
+import { Superscript } from '@tiptap/extension-superscript';
+import { Image } from '@tiptap/extension-image';
+import { Table } from '@tiptap/extension-table';
+import { TableRow } from '@tiptap/extension-table-row';
+import { TableCell } from '@tiptap/extension-table-cell';
+import { TableHeader } from '@tiptap/extension-table-header';
+import { Placeholder } from '@tiptap/extension-placeholder';
+import { CharacterCount } from '@tiptap/extension-character-count';
 import { useAppStore } from '../../store/useAppStore';
 
 const EditorArea: React.FC = () => {
   const { setSaveStatus } = useAppStore();
-  const saveTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  const saveTimeoutRef = React.useRef<any>(null);
 
   const editor = useEditor({
     extensions: [
-      StarterKit.configure({
-        history: false,
-      }),
+      StarterKit,
       FontFamily,
       TextStyle,
       Color,
@@ -36,12 +31,8 @@ const EditorArea: React.FC = () => {
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
-      Underline,
       Subscript,
       Superscript,
-      Link.configure({
-        openOnClick: false,
-      }),
       Image,
       Table.configure({
         resizable: true,
@@ -49,7 +40,6 @@ const EditorArea: React.FC = () => {
       TableRow,
       TableHeader,
       TableCell,
-      History,
       Placeholder.configure({
         placeholder: 'මෙතැන ටයිප් කරන්න...',
       }),

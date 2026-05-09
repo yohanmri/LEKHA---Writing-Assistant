@@ -24,6 +24,7 @@ import {
   ArrowDownWideNarrow,
   Pilcrow
 } from 'lucide-react';
+import { useAppStore } from '../../../store/useAppStore';
 
 const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
   <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1">
@@ -36,14 +37,30 @@ const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ l
   </div>
 );
 
-const IconButton: React.FC<{ icon: React.ElementType; label?: string; subLabel?: string; large?: boolean }> = ({ icon: Icon, label, large }) => (
-  <button className={`flex flex-col items-center justify-center hover:bg-gray-100 rounded px-1.5 transition-colors ${large ? 'h-full min-w-[48px]' : 'h-8'}`}>
-    <Icon size={large ? 24 : 18} strokeWidth={large ? 1.5 : 2} className="text-gray-700" />
-    {label && <span className="text-[10px] mt-0.5 text-gray-600">{label}</span>}
+const IconButton: React.FC<{ 
+  icon: React.ElementType; 
+  label?: string; 
+  subLabel?: string; 
+  large?: boolean;
+  onClick?: () => void;
+  active?: boolean;
+}> = ({ icon: Icon, label, large, onClick, active }) => (
+  <button 
+    onClick={onClick}
+    className={`
+      flex flex-col items-center justify-center rounded px-1.5 transition-colors
+      ${large ? 'h-full min-w-[48px]' : 'h-8'}
+      ${active ? 'bg-amber-50 text-[#C9973A]' : 'hover:bg-gray-100'}
+    `}
+  >
+    <Icon size={large ? 24 : 18} strokeWidth={large ? 1.5 : 2} className={active ? 'text-[#C9973A]' : 'text-gray-700'} />
+    {label && <span className={`text-[10px] mt-0.5 ${active ? 'text-[#C9973A]' : 'text-gray-600'}`}>{label}</span>}
   </button>
 );
 
 const HomeTab: React.FC = () => {
+  const { isKeyboardOpen, toggleKeyboard } = useAppStore();
+
   return (
     <div className="flex h-full items-center">
       <RibbonGroup label="Clipboard">
@@ -132,7 +149,12 @@ const HomeTab: React.FC = () => {
         <div className="flex flex-col">
           <IconButton icon={Search} label="Find" />
           <IconButton icon={Replace} label="Replace" />
-          <IconButton icon={MousePointer2} label="Select" />
+          <IconButton 
+            icon={MousePointer2} 
+            label="Keyboard" 
+            onClick={toggleKeyboard}
+            active={isKeyboardOpen}
+          />
         </div>
       </RibbonGroup>
     </div>
