@@ -13,13 +13,13 @@ const LayoutTab: React.FC = () => {
     <div className="flex h-full items-center">
 
       <RibbonGroup label="Page Setup">
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={FileText} label="Margins" />
           <SmallBtn icon={FileText} label="Orientation" />
           <SmallBtn icon={FileText} label="Size" />
         </div>
         <LargeBtn icon={Columns2} label="Columns" />
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={Scissors} label="Breaks" />
           <SmallBtn icon={List} label="Line #" />
         </div>
@@ -39,15 +39,15 @@ const LayoutTab: React.FC = () => {
       </RibbonGroup>
 
       <RibbonGroup label="Arrange">
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={Square} label="Position" />
           <SmallBtn icon={Layers} label="Wrap Text" />
         </div>
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={ArrowUp} label="Bring Fwd" />
           <SmallBtn icon={ArrowDown} label="Send Bk" />
         </div>
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={RotateCw} label="Rotate" />
           <SmallBtn icon={AlignCenter} label="Align" />
         </div>

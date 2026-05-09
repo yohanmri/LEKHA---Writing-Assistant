@@ -4,11 +4,11 @@ import { ChevronDown } from 'lucide-react';
 // ─── Shared Ribbon Primitives ──────────────────────────────────────────────────
 
 export const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div className="flex flex-col h-full border-r border-gray-200 px-1.5 py-0.5 flex-shrink-0">
-    <div className="flex-1 flex items-center gap-0.5 flex-nowrap overflow-hidden">
+  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1 flex-shrink-0">
+    <div className="flex-1 flex items-center gap-1 flex-nowrap">
       {children}
     </div>
-    <div className="text-[9px] text-gray-400 text-center mt-0.5 uppercase tracking-tighter select-none pointer-events-none">
+    <div className="text-[10px] text-gray-500 text-center mt-1 select-none pointer-events-none tracking-tight">
       {label}
     </div>
   </div>
@@ -25,12 +25,12 @@ export const LargeBtn: React.FC<{
 }> = ({ icon: Icon, label, onClick, active, color, hasArrow }) => (
   <button
     onClick={onClick}
-    className={`flex flex-col items-center justify-center rounded px-1.5 py-0.5 transition-colors min-w-[40px] h-full gap-0
+    className={`flex flex-col items-center justify-center rounded px-2 py-1 transition-colors min-w-[44px] h-full gap-0.5
       ${active ? 'bg-[#edebe9] text-[#2b2b2b] shadow-inner' : 'hover:bg-[#f3f2f1] text-[#323130]'}`}
   >
-    <Icon size={20} strokeWidth={1.5} style={color ? { color } : {}} />
-    <span className="text-[10px] whitespace-nowrap text-center leading-tight mt-0.5">{label}</span>
-    {hasArrow && <ChevronDown size={8} className="text-gray-400 -mt-0.5" />}
+    <Icon size={22} strokeWidth={1.5} style={color ? { color } : {}} />
+    <span className="text-[11px] whitespace-nowrap text-center leading-tight">{label}</span>
+    {hasArrow && <ChevronDown size={8} className="text-gray-400 mt-0.5" />}
   </button>
 );
 
@@ -45,11 +45,11 @@ export const SmallBtn: React.FC<{
   <button
     onClick={onClick}
     title={title}
-    className={`flex items-center gap-1 rounded px-1.5 py-0.5 transition-colors h-6 flex-shrink-0
+    className={`flex items-center gap-1.5 rounded px-2 py-0.5 transition-colors h-[22px] flex-shrink-0
       ${active ? 'bg-[#edebe9] text-[#2b2b2b]' : 'hover:bg-[#f3f2f1] text-[#323130]'}`}
   >
     <Icon size={14} strokeWidth={2} />
-    {label && <span className="text-[10.5px]">{label}</span>}
+    {label && <span className="text-[11px] font-normal">{label}</span>}
   </button>
 );
 
@@ -62,11 +62,11 @@ export const SinhalaBtn: React.FC<{
 }> = ({ icon: Icon, label, onClick, active }) => (
   <button
     onClick={onClick}
-    className={`flex flex-col items-center justify-center rounded px-1.5 py-0.5 transition-colors min-w-[52px] h-full gap-0
+    className={`flex flex-col items-center justify-center rounded px-2 py-1 transition-colors min-w-[56px] h-full gap-0.5
       ${active ? 'bg-green-50 text-[#1A7A6E] shadow-sm' : 'hover:bg-[#f3f2f1] text-[#323130]'}`}
   >
-    <Icon size={20} strokeWidth={1.5} className={active ? 'text-[#1A7A6E]' : ''} />
-    <span className="text-[10px] whitespace-nowrap text-center leading-tight mt-0.5">{label}</span>
+    <Icon size={22} strokeWidth={1.5} className={active ? 'text-[#1A7A6E]' : ''} />
+    <span className="text-[11px] whitespace-nowrap text-center leading-tight">{label}</span>
   </button>
 );
 
@@ -100,14 +100,14 @@ export const SplitLargeBtn: React.FC<{
     <div ref={ref} className="relative flex h-full flex-shrink-0">
       <button
         onClick={onMain}
-        className="flex flex-col items-center justify-center rounded-l px-1.5 py-0.5 transition-colors min-w-[40px] h-full gap-0 hover:bg-[#f3f2f1] text-[#323130]"
+        className="flex flex-col items-center justify-center rounded-l px-2 py-1 transition-colors min-w-[44px] h-full gap-0.5 hover:bg-[#f3f2f1] text-[#323130]"
       >
-        <Icon size={20} strokeWidth={1.5} style={color ? { color } : {}} />
-        <span className="text-[10px] whitespace-nowrap text-center leading-tight mt-0.5">{label}</span>
+        <Icon size={22} strokeWidth={1.5} style={color ? { color } : {}} />
+        <span className="text-[11px] whitespace-nowrap text-center leading-tight">{label}</span>
       </button>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-end pb-1.5 px-0.5 hover:bg-[#edebe9] rounded-r text-gray-400 transition-colors h-full"
+        className="flex items-center justify-center px-1 hover:bg-[#edebe9] rounded-r text-gray-400 transition-colors h-full border-l border-gray-100"
       >
         <ChevronDown size={8} />
       </button>
@@ -172,7 +172,7 @@ export const DropBtn: React.FC<{
 };
 
 // Divider
-export const RibbonDivider = () => <div className="w-px h-6 bg-gray-200 mx-1 self-center flex-shrink-0" />;
+export const RibbonDivider = () => <div className="w-px h-10 bg-gray-200 mx-1.5 self-center flex-shrink-0" />;
 
 // Color swatch row
 export const ColorRow: React.FC<{ colors: string[]; onPick?: (c: string) => void }> = ({ colors, onPick }) => (

@@ -117,7 +117,7 @@ const InsertTab: React.FC = () => {
       </RibbonGroup>
 
       <RibbonGroup label="Links">
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={Link} label="Link" />
           <SmallBtn icon={Bookmark} label="Bookmark" />
           <SmallBtn icon={Navigation} label="Cross-ref" />
@@ -125,7 +125,7 @@ const InsertTab: React.FC = () => {
       </RibbonGroup>
 
       <RibbonGroup label="Header & Footer">
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={PanelTop} label="Header" />
           <SmallBtn icon={PanelBottom} label="Footer" />
           <SmallBtn icon={Hash} label="Page #" />
@@ -133,7 +133,7 @@ const InsertTab: React.FC = () => {
       </RibbonGroup>
 
       <RibbonGroup label="Text">
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={TextCursorInput} label="Text Box" />
           <SmallBtn icon={Type} label="WordArt" />
           <SmallBtn icon={FileSignature} label="Signature" />
@@ -141,7 +141,7 @@ const InsertTab: React.FC = () => {
       </RibbonGroup>
 
       <RibbonGroup label="Symbols">
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={Sigma} label="Equation" />
           <SmallBtn icon={AtSign} label="Symbol" />
         </div>

@@ -63,7 +63,7 @@ const HomeTab: React.FC = () => {
             { label: 'Text Only' },
           ]}
         />
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={Scissors} label="Cut" title="Cut (Ctrl+X)" />
           <SmallBtn icon={Copy} label="Copy" title="Copy (Ctrl+C)" />
           <SmallBtn icon={Paintbrush} label="Painter" title="Format Painter" />
@@ -140,20 +140,20 @@ const HomeTab: React.FC = () => {
             { name: 'Heading 2', preview: 'AaBbCc', style: 'font-bold text-blue-500' },
             { name: 'Title', preview: 'AaBbCc', style: 'font-bold' },
           ].map(s => (
-            <div key={s.name} className="border border-gray-200 rounded p-1 h-11 w-14 flex flex-col justify-between hover:bg-[#f3f2f1] hover:border-gray-300 cursor-pointer transition-colors flex-shrink-0 bg-white">
-              <span className={`text-[9px] ${s.style} leading-none truncate`}>{s.preview}</span>
-              <span className="text-[7.5px] text-gray-500 leading-none truncate">{s.name}</span>
+            <div key={s.name} className="border border-gray-200 rounded p-1.5 h-16 w-20 flex flex-col justify-between hover:bg-[#f3f2f1] hover:border-gray-300 cursor-pointer transition-colors flex-shrink-0 bg-white">
+              <span className={`text-[11px] ${s.style} leading-tight truncate`}>{s.preview}</span>
+              <span className="text-[9px] text-gray-500 leading-none truncate font-medium">{s.name}</span>
             </div>
           ))}
-          <button className="flex items-center justify-center hover:bg-[#f3f2f1] rounded h-11 w-5 text-gray-400">
-            <ChevronDown size={10} />
+          <button className="flex items-center justify-center hover:bg-[#f3f2f1] rounded h-16 w-6 text-gray-400 border-l border-gray-100 ml-1">
+            <ChevronDown size={12} />
           </button>
         </div>
       </RibbonGroup>
 
       {/* Editing */}
       <RibbonGroup label="Editing">
-        <div className="flex flex-col h-full justify-center gap-0">
+        <div className="flex flex-col h-full justify-center gap-0.5">
           <SmallBtn icon={Search} label="Find" />
           <SmallBtn icon={Replace} label="Replace" />
           <SmallBtn icon={MousePointer2} label="Select" />
