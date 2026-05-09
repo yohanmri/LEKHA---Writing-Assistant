@@ -59,7 +59,7 @@ const TableDropBtn: React.FC = () => {
         <ChevronDown size={8} className="text-gray-400" />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-lg z-[200]">
+        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-xl z-[9999]">
           <TablePicker onClose={() => setOpen(false)} />
         </div>
       )}
@@ -83,7 +83,7 @@ const ShapesDropBtn: React.FC = () => {
         <ChevronDown size={8} className="text-gray-400" />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-lg z-[200] p-1.5 w-40">
+        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-xl z-[9999] p-1.5 w-40">
           <div className="text-[9px] text-gray-400 mb-1 px-0.5 uppercase font-bold">Recently Used</div>
           <div className="flex gap-1 flex-wrap">
             {shapes.map((s, i) => (
@@ -110,7 +110,7 @@ const InsertTab: React.FC = () => {
         <TableDropBtn />
       </RibbonGroup>
 
-      <RibbonGroup label="Media">
+      <RibbonGroup label="Illustrations">
         <SplitLargeBtn icon={Image} label="Picture" items={[{ label: 'Device' }, { label: 'Online' }]} />
         <ShapesDropBtn />
         <LargeBtn icon={Monitor} label="Screen" />

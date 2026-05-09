@@ -7,7 +7,8 @@ import {
   List, ListOrdered, IndentDecrease, IndentIncrease,
   SortAsc, Pilcrow, ChevronDown,
   Search, Replace, MousePointer2, Keyboard,
-  LineChart, BetweenHorizonalEnd, BetweenVerticalEnd
+  LineChart, BetweenHorizonalEnd, BetweenVerticalEnd,
+  Languages, Type
 } from 'lucide-react';
 import {
   RibbonGroup, LargeBtn, SmallBtn, SplitLargeBtn, DropBtn,
@@ -15,10 +16,8 @@ import {
 } from '../RibbonComponents';
 import { useAppStore } from '../../../store/useAppStore';
 
-const FONTS = [
-  'Noto Sans Sinhala', 'Abhaya Libre', 'Yaldevi',
-  'Arial', 'Times New Roman', 'Calibri', 'Georgia', 'Verdana', 'Courier New',
-];
+const SINHALA_FONTS = ['Noto Sans Sinhala', 'Abhaya Libre', 'Yaldevi', 'Iskoola Pota', 'DL-KMNN'];
+const LATIN_FONTS = ['Arial', 'Times New Roman', 'Calibri', 'Georgia', 'Verdana', 'Courier New', 'Helvetica'];
 const SIZES = ['8','9','10','11','12','14','16','18','20','22','24','28','32','36','48','72'];
 
 const ColorPickerBtn: React.FC<{ icon: React.ElementType; label: string; title: string }> = ({ icon: Icon, label, title }) => {
@@ -34,7 +33,7 @@ const ColorPickerBtn: React.FC<{ icon: React.ElementType; label: string; title: 
         <ChevronDown size={8} className="text-gray-400" />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded shadow-lg z-[200] p-1">
+        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded shadow-xl z-[9999] p-1">
           <div className="text-[10px] text-gray-400 px-1 mb-1 font-medium">{title}</div>
           <ColorRow colors={COLORS} onPick={() => setOpen(false)} />
         </div>
@@ -47,6 +46,9 @@ const HomeTab: React.FC = () => {
   const { isKeyboardOpen, toggleKeyboard } = useAppStore();
   const [fontSize, setFontSize] = useState('11');
   const [fontFamily, setFontFamily] = useState('Noto Sans Sinhala');
+  const [fontLang, setFontLang] = useState<'sinhala' | 'latin'>('sinhala');
+
+  const currentFonts = fontLang === 'sinhala' ? SINHALA_FONTS : LATIN_FONTS;
 
   return (
     <div className="flex h-full items-center">
@@ -72,19 +74,36 @@ const HomeTab: React.FC = () => {
 
       {/* Font */}
       <RibbonGroup label="Font">
+        <div className="flex flex-col gap-1 pr-1 border-r border-gray-100 mr-1 justify-center h-full">
+          <button 
+            title="Sinhala Fonts"
+            onClick={() => { setFontLang('sinhala'); setFontFamily(SINHALA_FONTS[0]); }}
+            className={`flex items-center justify-center w-8 h-7 rounded transition-all text-[11px] font-bold ${fontLang === 'sinhala' ? 'bg-[#1A7A6E] text-white shadow-sm' : 'hover:bg-gray-100 text-gray-400'}`}
+          >
+            සිං
+          </button>
+          <button 
+            title="Latin/English Fonts"
+            onClick={() => { setFontLang('latin'); setFontFamily(LATIN_FONTS[0]); }}
+            className={`flex items-center justify-center w-8 h-7 rounded transition-all text-[11px] font-bold ${fontLang === 'latin' ? 'bg-[#C9973A] text-white shadow-sm' : 'hover:bg-gray-100 text-gray-400'}`}
+          >
+            En
+          </button>
+        </div>
+
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-0.5">
             <select
               value={fontFamily}
               onChange={e => setFontFamily(e.target.value)}
-              className="text-[10.5px] border border-transparent hover:border-gray-300 hover:bg-[#f3f2f1] rounded px-1 h-6 w-28 outline-none bg-white transition-colors"
+              className="text-[11px] border border-transparent hover:border-gray-300 hover:bg-[#f3f2f1] rounded px-1.5 h-7 w-36 outline-none bg-white transition-colors font-medium text-[#323130]"
             >
-              {FONTS.map(f => <option key={f} value={f}>{f}</option>)}
+              {currentFonts.map(f => <option key={f} value={f}>{f}</option>)}
             </select>
             <select
               value={fontSize}
               onChange={e => setFontSize(e.target.value)}
-              className="text-[10.5px] border border-transparent hover:border-gray-300 hover:bg-[#f3f2f1] rounded px-1 h-6 w-10 outline-none bg-white transition-colors text-center"
+              className="text-[11px] border border-transparent hover:border-gray-300 hover:bg-[#f3f2f1] rounded px-1 h-7 w-11 outline-none bg-white transition-colors text-center text-[#323130]"
             >
               {SIZES.map(s => <option key={s}>{s}</option>)}
             </select>

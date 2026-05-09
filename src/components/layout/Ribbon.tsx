@@ -37,7 +37,7 @@ const Ribbon: React.FC = () => {
   };
 
   return (
-    <div className="bg-white flex flex-col z-40 border-b border-gray-200 shadow-sm flex-shrink-0 select-none">
+    <div className="bg-white flex flex-col z-[100] border-b border-gray-200 shadow-sm flex-shrink-0 select-none">
       {/* Tab Bar */}
       <div className="flex px-2 border-b border-gray-100 bg-[#f3f2f1] h-[30px] items-center">
         {tabs.map((tab) => {
@@ -68,9 +68,11 @@ const Ribbon: React.FC = () => {
       </div>
 
       {/* Ribbon Groups */}
-      <div className="h-[92px] px-2 bg-white flex overflow-x-auto no-scrollbar items-center border-b border-gray-200">
-        <div className="flex h-full items-center">
-          {renderTabContent()}
+      <div className="h-[92px] px-2 bg-white border-b border-gray-200 z-40 relative">
+        <div className="flex h-full items-center overflow-x-auto no-scrollbar overflow-y-visible pb-[200px] -mb-[200px]">
+          <div className="flex h-[92px] items-center">
+            {renderTabContent()}
+          </div>
         </div>
       </div>
     </div>

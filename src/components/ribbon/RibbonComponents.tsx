@@ -112,7 +112,7 @@ export const SplitLargeBtn: React.FC<{
         <ChevronDown size={8} />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-lg z-[200] min-w-[160px] py-1 animate-in fade-in slide-in-from-top-1 duration-150">
+        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-xl z-[9999] min-w-[160px] py-1 animate-in fade-in slide-in-from-top-1 duration-150">
           {items.map((item, i) =>
             item.divider ? (
               <div key={i} className="border-t border-gray-100 my-1" />
@@ -151,7 +151,7 @@ export const DropBtn: React.FC<{
         <ChevronDown size={8} className="text-gray-400" />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-lg z-[200] min-w-[140px] py-1 animate-in fade-in slide-in-from-top-1 duration-150">
+        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-xl z-[9999] min-w-[140px] py-1 animate-in fade-in slide-in-from-top-1 duration-150">
           {items.map((item, i) =>
             item.divider ? (
               <div key={i} className="border-t border-gray-100 my-1" />
