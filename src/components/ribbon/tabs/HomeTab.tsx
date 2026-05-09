@@ -65,7 +65,7 @@ const HomeTab: React.FC = () => {
             { label: 'Text Only' },
           ]}
         />
-        <div className="flex flex-col h-full justify-center gap-0.5">
+        <div className="flex flex-col justify-center gap-0.5">
           <SmallBtn icon={Scissors} label="Cut" title="Cut (Ctrl+X)" />
           <SmallBtn icon={Copy} label="Copy" title="Copy (Ctrl+C)" />
           <SmallBtn icon={Paintbrush} label="Painter" title="Format Painter" />
@@ -74,7 +74,7 @@ const HomeTab: React.FC = () => {
 
       {/* Font */}
       <RibbonGroup label="Font">
-        <div className="flex flex-col gap-1 pr-1 border-r border-gray-100 mr-1 justify-center h-full">
+        <div className="flex flex-col gap-1 pr-1 border-r border-gray-100 mr-1 justify-center">
           <button 
             title="Sinhala Fonts"
             onClick={() => { setFontLang('sinhala'); setFontFamily(SINHALA_FONTS[0]); }}
@@ -172,7 +172,7 @@ const HomeTab: React.FC = () => {
 
       {/* Editing */}
       <RibbonGroup label="Editing">
-        <div className="flex flex-col h-full justify-center gap-0.5">
+        <div className="flex flex-col justify-center gap-0.5">
           <SmallBtn icon={Search} label="Find" />
           <SmallBtn icon={Replace} label="Replace" />
           <SmallBtn icon={MousePointer2} label="Select" />
