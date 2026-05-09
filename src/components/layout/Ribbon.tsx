@@ -69,8 +69,8 @@ const Ribbon: React.FC = () => {
 
       {/* Ribbon Groups */}
       <div className="h-[92px] px-2 bg-white border-b border-gray-200 z-[100] relative overflow-visible">
-        <div className="h-[92px] overflow-x-auto no-scrollbar overflow-y-visible">
-          <div className="flex h-[92px] items-center pb-[500px] -mb-[500px]">
+        <div className="overflow-x-auto no-scrollbar overflow-y-visible pb-[500px] -mb-[500px]">
+          <div className="flex items-center">
             {renderTabContent()}
           </div>
         </div>

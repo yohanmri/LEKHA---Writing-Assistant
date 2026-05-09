@@ -4,11 +4,11 @@ import { ChevronDown } from 'lucide-react';
 // ─── Shared Ribbon Primitives ──────────────────────────────────────────────────
 
 export const RibbonGroup: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div className="flex flex-col h-full border-r border-gray-200 px-2 py-1 flex-shrink-0">
+  <div className="flex flex-col h-[92px] border-r border-gray-200 px-2 py-1 flex-shrink-0 bg-white">
     <div className="flex-1 flex items-center justify-center gap-1 flex-nowrap min-h-0">
       {children}
     </div>
-    <div className="text-[10px] text-gray-500 text-center mt-1 select-none pointer-events-none tracking-tight">
+    <div className="text-[10px] text-gray-500 text-center mt-auto mb-1 select-none pointer-events-none tracking-tight">
       {label}
     </div>
   </div>
