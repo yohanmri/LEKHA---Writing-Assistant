@@ -9,16 +9,15 @@ import {
   TextCursorInput, FileSignature, CalendarDays, Type,
   Sigma, AtSign, ChevronDown
 } from 'lucide-react';
-import { RibbonGroup, LargeBtn, SmallBtn, SplitLargeBtn, DropBtn, useDropdown } from '../RibbonComponents';
+import { RibbonGroup, LargeBtn, SmallBtn, SplitLargeBtn, DropBtn, useDropdown, RibbonDivider } from '../RibbonComponents';
 
-// Table grid picker
 const TablePicker: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [hover, setHover] = useState<[number, number]>([0, 0]);
   const ROWS = 8, COLS = 10;
 
   return (
-    <div className="p-2">
-      <div className="text-[11px] text-gray-500 mb-2">
+    <div className="p-2 w-[220px]">
+      <div className="text-[10px] text-gray-500 mb-1.5 font-medium px-0.5">
         {hover[0] > 0 ? `${hover[1]} × ${hover[0]} Table` : 'Insert Table'}
       </div>
       <div className="grid gap-0.5" style={{ gridTemplateColumns: `repeat(${COLS}, 1fr)` }}>
@@ -29,8 +28,8 @@ const TablePicker: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           return (
             <div
               key={idx}
-              className={`w-5 h-5 border rounded-sm cursor-pointer transition-colors ${
-                isActive ? 'bg-[#C9973A] border-[#C9973A]' : 'border-gray-300 hover:border-gray-400'
+              className={`w-4.5 h-4.5 border rounded-sm cursor-pointer transition-colors ${
+                isActive ? 'bg-[#C9973A] border-[#C9973A]' : 'border-gray-200 hover:border-gray-400'
               }`}
               onMouseEnter={() => setHover([row, col])}
               onClick={onClose}
@@ -38,11 +37,9 @@ const TablePicker: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           );
         })}
       </div>
-      <div className="border-t border-gray-100 mt-2 pt-1 space-y-0.5">
-        <button className="w-full text-left text-[12px] px-1 py-1 hover:bg-gray-50 rounded">Insert Table...</button>
-        <button className="w-full text-left text-[12px] px-1 py-1 hover:bg-gray-50 rounded">Draw Table</button>
-        <button className="w-full text-left text-[12px] px-1 py-1 hover:bg-gray-50 rounded">Excel Spreadsheet</button>
-        <button className="w-full text-left text-[12px] px-1 py-1 hover:bg-gray-50 rounded">Quick Tables ▶</button>
+      <div className="border-t border-gray-100 mt-2 pt-1 space-y-0">
+        <button className="w-full text-left text-[11px] px-1.5 py-1 hover:bg-[#f3f2f1] rounded text-[#323130]">Insert Table...</button>
+        <button className="w-full text-left text-[11px] px-1.5 py-1 hover:bg-[#f3f2f1] rounded text-[#323130]">Draw Table</button>
       </div>
     </div>
   );
@@ -51,17 +48,18 @@ const TablePicker: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 const TableDropBtn: React.FC = () => {
   const { open, setOpen, ref } = useDropdown();
   return (
-    <div ref={ref} className="relative h-full">
+    <div ref={ref} className="relative h-full flex-shrink-0">
       <button
         onClick={() => setOpen(!open)}
-        className="flex flex-col items-center justify-center rounded px-2 py-1 transition-colors min-w-[44px] h-full gap-0.5 hover:bg-gray-100 text-gray-700"
+        className={`flex flex-col items-center justify-center rounded px-1.5 py-0.5 transition-colors min-w-[40px] h-full gap-0
+          ${open ? 'bg-[#edebe9] text-[#2b2b2b]' : 'hover:bg-[#f3f2f1] text-[#323130]'}`}
       >
-        <Table size={22} strokeWidth={1.5} />
-        <span className="text-[10px]">Table</span>
-        <ChevronDown size={9} className="text-gray-400" />
+        <Table size={20} strokeWidth={1.5} />
+        <span className="text-[10px] mt-0.5">Table</span>
+        <ChevronDown size={8} className="text-gray-400" />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded shadow-lg z-[200]">
+        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-lg z-[200]">
           <TablePicker onClose={() => setOpen(false)} />
         </div>
       )}
@@ -71,35 +69,27 @@ const TableDropBtn: React.FC = () => {
 
 const ShapesDropBtn: React.FC = () => {
   const { open, setOpen, ref } = useDropdown();
-  const categories = [
-    { name: 'Lines', shapes: ['─', '→', '↔', '⤷', '↗', '⟹'] },
-    { name: 'Basic Shapes', shapes: ['□', '◯', '△', '⬡', '⬟', '☆'] },
-    { name: 'Arrows', shapes: ['⇒', '⇐', '⇑', '⇓', '⇔', '⤋'] },
-    { name: 'Callouts', shapes: ['💬', '💭', '🗨', '🗯', '📢', '📣'] },
-  ];
+  const shapes = ['□', '◯', '△', '⬡', '→', '☆', '□', '◯'];
 
   return (
-    <div ref={ref} className="relative h-full">
+    <div ref={ref} className="relative h-full flex-shrink-0">
       <button
         onClick={() => setOpen(!open)}
-        className="flex flex-col items-center justify-center rounded px-2 py-1 hover:bg-gray-100 text-gray-700 h-full gap-0.5 min-w-[44px]"
+        className={`flex flex-col items-center justify-center rounded px-1.5 py-0.5 transition-colors min-w-[40px] h-full gap-0
+          ${open ? 'bg-[#edebe9] text-[#2b2b2b]' : 'hover:bg-[#f3f2f1] text-[#323130]'}`}
       >
-        <Shapes size={22} strokeWidth={1.5} />
-        <span className="text-[10px]">Shapes</span>
-        <ChevronDown size={9} className="text-gray-400" />
+        <Shapes size={20} strokeWidth={1.5} />
+        <span className="text-[10px] mt-0.5">Shapes</span>
+        <ChevronDown size={8} className="text-gray-400" />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded shadow-lg z-[200] p-2 w-56">
-          {categories.map(cat => (
-            <div key={cat.name} className="mb-2">
-              <div className="text-[10px] text-gray-400 font-medium mb-1">{cat.name}</div>
-              <div className="flex gap-1 flex-wrap">
-                {cat.shapes.map((s, i) => (
-                  <button key={i} onClick={() => setOpen(false)} className="w-7 h-7 text-lg hover:bg-gray-100 rounded flex items-center justify-center">{s}</button>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div className="absolute top-full left-0 mt-0.5 bg-white border border-gray-200 rounded shadow-lg z-[200] p-1.5 w-40">
+          <div className="text-[9px] text-gray-400 mb-1 px-0.5 uppercase font-bold">Recently Used</div>
+          <div className="flex gap-1 flex-wrap">
+            {shapes.map((s, i) => (
+              <button key={i} onClick={() => setOpen(false)} className="w-7 h-7 text-lg hover:bg-[#f3f2f1] rounded flex items-center justify-center">{s}</button>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -108,160 +98,53 @@ const ShapesDropBtn: React.FC = () => {
 
 const InsertTab: React.FC = () => {
   return (
-    <div className="flex h-full items-center overflow-x-auto">
+    <div className="flex h-full items-center">
 
-      {/* PAGES */}
       <RibbonGroup label="Pages">
-        <SplitLargeBtn icon={FileText} label="Cover Page" items={[
-          { label: 'Annual Report' },
-          { label: 'Banded' },
-          { label: 'Facet' },
-          { label: 'Ion' },
-          { label: 'Motion' },
-          { label: 'Retrospect' },
-          { divider: true },
-          { label: 'Remove Current Cover Page' },
-          { label: 'Save Selection to Gallery...' },
-        ]} />
-        <LargeBtn icon={FileX} label="Blank Page" />
-        <SplitLargeBtn icon={Scissors} label="Page Break" items={[
-          { label: 'Page Break (Ctrl+Enter)' },
-          { label: 'Column Break' },
-          { label: 'Text Wrapping Break' },
-          { divider: true },
-          { label: 'Next Page (Section Break)' },
-          { label: 'Continuous' },
-          { label: 'Even Page' },
-          { label: 'Odd Page' },
-        ]} />
+        <LargeBtn icon={FileText} label="Cover" />
+        <LargeBtn icon={FileX} label="Blank" />
+        <LargeBtn icon={Scissors} label="Break" />
       </RibbonGroup>
 
-      {/* TABLE */}
       <RibbonGroup label="Tables">
         <TableDropBtn />
       </RibbonGroup>
 
-      {/* MEDIA */}
       <RibbonGroup label="Media">
-        <SplitLargeBtn icon={Image} label="Picture" items={[
-          { label: 'This Device...' },
-          { label: 'Online Pictures...' },
-          { label: 'From URL...' },
-          { divider: true },
-          { label: 'Stock Images...' },
-        ]} />
+        <SplitLargeBtn icon={Image} label="Picture" items={[{ label: 'Device' }, { label: 'Online' }]} />
         <ShapesDropBtn />
-        <SplitLargeBtn icon={Square} label="Icons" items={[
-          { label: 'Insert Icon...' },
-          { label: 'Browse Icons Library' },
-        ]} />
-        <LargeBtn icon={Monitor} label="Screenshot" />
+        <LargeBtn icon={Monitor} label="Screen" />
       </RibbonGroup>
 
-      {/* LINKS */}
       <RibbonGroup label="Links">
-        <SplitLargeBtn icon={Link} label="Link" items={[
-          { label: 'Insert Link (Ctrl+K)' },
-          { label: 'Recent Links ▶' },
-          { label: 'Existing File or Webpage' },
-          { label: 'Place in This Document' },
-          { label: 'Email Address' },
-        ]} />
-        <LargeBtn icon={Bookmark} label="Bookmark" />
-        <LargeBtn icon={Navigation} label="Cross-ref" />
+        <div className="flex flex-col h-full justify-center gap-0">
+          <SmallBtn icon={Link} label="Link" />
+          <SmallBtn icon={Bookmark} label="Bookmark" />
+          <SmallBtn icon={Navigation} label="Cross-ref" />
+        </div>
       </RibbonGroup>
 
-      {/* HEADER & FOOTER */}
       <RibbonGroup label="Header & Footer">
-        <SplitLargeBtn icon={PanelTop} label="Header" items={[
-          { label: 'Blank' },
-          { label: 'Blank (Three Columns)' },
-          { label: 'Alphabet' },
-          { label: 'Annual' },
-          { label: 'Austin' },
-          { label: 'Banded' },
-          { divider: true },
-          { label: 'Edit Header' },
-          { label: 'Remove Header' },
-          { label: 'Save Selection to Gallery...' },
-        ]} />
-        <SplitLargeBtn icon={PanelBottom} label="Footer" items={[
-          { label: 'Blank' },
-          { label: 'Blank (Three Columns)' },
-          { label: 'Alphabet' },
-          { label: 'Annual' },
-          { divider: true },
-          { label: 'Edit Footer' },
-          { label: 'Remove Footer' },
-          { label: 'Save Selection to Gallery...' },
-        ]} />
-        <SplitLargeBtn icon={Hash} label="Page #" items={[
-          { label: 'Top of Page ▶' },
-          { label: 'Bottom of Page ▶' },
-          { label: 'Page Margins ▶' },
-          { label: 'Current Position ▶' },
-          { divider: true },
-          { label: 'Format Page Numbers...' },
-          { label: 'Remove Page Numbers' },
-        ]} />
+        <div className="flex flex-col h-full justify-center gap-0">
+          <SmallBtn icon={PanelTop} label="Header" />
+          <SmallBtn icon={PanelBottom} label="Footer" />
+          <SmallBtn icon={Hash} label="Page #" />
+        </div>
       </RibbonGroup>
 
-      {/* TEXT */}
       <RibbonGroup label="Text">
-        <SplitLargeBtn icon={TextCursorInput} label="Text Box" items={[
-          { label: 'Simple Text Box' },
-          { label: 'Austin Quote' },
-          { label: 'Banded Quote' },
-          { divider: true },
-          { label: 'Draw Text Box' },
-          { label: 'Save Selection to Gallery...' },
-        ]} />
-        <LargeBtn icon={Type} label="WordArt" />
-        <SplitLargeBtn icon={Type} label="Drop Cap" items={[
-          { label: 'None' },
-          { label: 'Dropped' },
-          { label: 'In Margin' },
-          { divider: true },
-          { label: 'Drop Cap Options...' },
-        ]} />
-        <LargeBtn icon={FileSignature} label="Signature" />
-        <SplitLargeBtn icon={CalendarDays} label="Date & Time" items={[
-          { label: 'dd/MM/yyyy' },
-          { label: 'dddd, MMMM d, yyyy' },
-          { label: 'MMMM d, yyyy' },
-          { label: 'M/d/yyyy' },
-          { divider: true },
-          { label: 'More Formats...' },
-        ]} />
+        <div className="flex flex-col h-full justify-center gap-0">
+          <SmallBtn icon={TextCursorInput} label="Text Box" />
+          <SmallBtn icon={Type} label="WordArt" />
+          <SmallBtn icon={FileSignature} label="Signature" />
+        </div>
       </RibbonGroup>
 
-      {/* SYMBOLS */}
       <RibbonGroup label="Symbols">
-        <SplitLargeBtn icon={Sigma} label="Equation" items={[
-          { label: 'Insert New Equation' },
-          { label: 'Ink Equation' },
-          { divider: true },
-          { label: 'Pythagorean Theorem' },
-          { label: 'Area of Circle' },
-          { label: 'Quadratic Formula' },
-          { label: 'Taylor Expansion' },
-          { divider: true },
-          { label: 'More Equations from Office.com...' },
-        ]} />
-        <SplitLargeBtn icon={AtSign} label="Symbol" items={[
-          { label: '© Copyright' },
-          { label: '® Registered' },
-          { label: '™ Trademark' },
-          { label: '± Plus-Minus' },
-          { label: '≠ Not Equal' },
-          { label: '≤ Less or Equal' },
-          { label: '≥ Greater or Equal' },
-          { label: '÷ Division' },
-          { label: '× Multiplication' },
-          { divider: true },
-          { label: 'More Symbols...' },
-          { label: 'Sinhala Characters...' },
-        ]} />
+        <div className="flex flex-col h-full justify-center gap-0">
+          <SmallBtn icon={Sigma} label="Equation" />
+          <SmallBtn icon={AtSign} label="Symbol" />
+        </div>
       </RibbonGroup>
 
     </div>

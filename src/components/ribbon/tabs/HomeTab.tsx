@@ -24,22 +24,19 @@ const SIZES = ['8','9','10','11','12','14','16','18','20','22','24','28','32','3
 const ColorPickerBtn: React.FC<{ icon: React.ElementType; label: string; title: string }> = ({ icon: Icon, label, title }) => {
   const { open, setOpen, ref } = useDropdown();
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative flex-shrink-0">
       <button
         title={title}
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-0.5 rounded px-1 py-0.5 hover:bg-gray-100 h-7 text-gray-700"
+        className="flex items-center gap-0.5 rounded px-1 hover:bg-[#f3f2f1] h-6 text-[#323130] transition-colors"
       >
-        <Icon size={16} strokeWidth={2} />
-        <ChevronDown size={9} className="text-gray-400" />
+        <Icon size={14} strokeWidth={2} />
+        <ChevronDown size={8} className="text-gray-400" />
       </button>
       {open && (
         <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded shadow-lg z-[200] p-1">
-          <div className="text-[10px] text-gray-400 px-1 mb-1">{title}</div>
+          <div className="text-[10px] text-gray-400 px-1 mb-1 font-medium">{title}</div>
           <ColorRow colors={COLORS} onPick={() => setOpen(false)} />
-          <div className="border-t border-gray-100 mt-1 pt-1 px-1">
-            <button className="text-[11px] text-[#C9973A] hover:underline">Custom Color...</button>
-          </div>
         </div>
       )}
     </div>
@@ -52,158 +49,115 @@ const HomeTab: React.FC = () => {
   const [fontFamily, setFontFamily] = useState('Noto Sans Sinhala');
 
   return (
-    <div className="flex h-full items-center overflow-x-auto">
+    <div className="flex h-full items-center">
 
-      {/* CLIPBOARD */}
+      {/* Clipboard */}
       <RibbonGroup label="Clipboard">
         <SplitLargeBtn
           icon={Clipboard}
           label="Paste"
-          onMain={() => document.execCommand('paste')}
           items={[
             { label: 'Paste (Ctrl+V)' },
-            { label: 'Paste Special...', sub: 'Choose paste format' },
-            { label: 'Paste as Plain Text' },
-            { divider: true },
             { label: 'Keep Source Formatting' },
             { label: 'Merge Formatting' },
             { label: 'Text Only' },
           ]}
         />
-        <div className="flex flex-col h-full justify-center">
-          <SmallBtn icon={Scissors} label="Cut" title="Cut (Ctrl+X)" onClick={() => document.execCommand('cut')} />
-          <SmallBtn icon={Copy} label="Copy" title="Copy (Ctrl+C)" onClick={() => document.execCommand('copy')} />
-          <SmallBtn icon={Paintbrush} label="Format Painter" title="Copy formatting" />
+        <div className="flex flex-col h-full justify-center gap-0">
+          <SmallBtn icon={Scissors} label="Cut" title="Cut (Ctrl+X)" />
+          <SmallBtn icon={Copy} label="Copy" title="Copy (Ctrl+C)" />
+          <SmallBtn icon={Paintbrush} label="Painter" title="Format Painter" />
         </div>
       </RibbonGroup>
 
-      {/* FONT */}
+      {/* Font */}
       <RibbonGroup label="Font">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1">
+        <div className="flex flex-col gap-0.5">
+          <div className="flex items-center gap-0.5">
             <select
               value={fontFamily}
               onChange={e => setFontFamily(e.target.value)}
-              className="text-[11px] border border-gray-200 rounded px-1 h-6 w-36 outline-none hover:border-gray-300 bg-white"
+              className="text-[10.5px] border border-transparent hover:border-gray-300 hover:bg-[#f3f2f1] rounded px-1 h-6 w-28 outline-none bg-white transition-colors"
             >
-              {FONTS.map(f => <option key={f} value={f} style={{ fontFamily: f }}>{f}</option>)}
+              {FONTS.map(f => <option key={f} value={f}>{f}</option>)}
             </select>
             <select
               value={fontSize}
               onChange={e => setFontSize(e.target.value)}
-              className="text-[11px] border border-gray-200 rounded px-1 h-6 w-12 outline-none hover:border-gray-300 bg-white"
+              className="text-[10.5px] border border-transparent hover:border-gray-300 hover:bg-[#f3f2f1] rounded px-1 h-6 w-10 outline-none bg-white transition-colors text-center"
             >
               {SIZES.map(s => <option key={s}>{s}</option>)}
             </select>
-            <div className="flex items-center">
-              <SmallBtn icon={CaseSensitive} title="Grow Font (Ctrl+>)" />
-              <SmallBtn icon={CaseSensitive} title="Shrink Font (Ctrl+<)" />
-              <SmallBtn icon={Eraser} title="Clear All Formatting" />
-            </div>
-          </div>
-          <div className="flex items-center gap-0.5">
-            <SmallBtn icon={Bold} title="Bold (Ctrl+B)" />
-            <SmallBtn icon={Italic} title="Italic (Ctrl+I)" />
-            <SmallBtn icon={Underline} title="Underline (Ctrl+U)" />
-            <SmallBtn icon={Strikethrough} title="Strikethrough" />
-            <SmallBtn icon={Subscript} title="Subscript (Ctrl+=)" />
-            <SmallBtn icon={Superscript} title="Superscript (Ctrl+Shift+=)" />
             <RibbonDivider />
-            <ColorPickerBtn icon={Highlighter} label="H" title="Text Highlight Color" />
+            <SmallBtn icon={CaseSensitive} title="Grow Font" />
+            <SmallBtn icon={CaseSensitive} title="Shrink Font" />
+            <SmallBtn icon={Eraser} title="Clear Formatting" />
+          </div>
+          <div className="flex items-center gap-0">
+            <SmallBtn icon={Bold} title="Bold" />
+            <SmallBtn icon={Italic} title="Italic" />
+            <SmallBtn icon={Underline} title="Underline" />
+            <SmallBtn icon={Strikethrough} title="Strikethrough" />
+            <SmallBtn icon={Subscript} title="Subscript" />
+            <SmallBtn icon={Superscript} title="Superscript" />
+            <RibbonDivider />
+            <ColorPickerBtn icon={Highlighter} label="H" title="Highlight" />
             <ColorPickerBtn icon={Baseline} label="A" title="Font Color" />
           </div>
         </div>
       </RibbonGroup>
 
-      {/* PARAGRAPH */}
+      {/* Paragraph */}
       <RibbonGroup label="Paragraph">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-0.5">
-            <SplitLargeBtn icon={List} label="" items={[
-              { label: 'None' },
-              { label: 'Bullet •' },
-              { label: 'Disc ●' },
-              { label: 'Circle ○' },
-              { label: 'Square ■' },
-              { divider: true },
-              { label: 'Define New Bullet...' },
-            ]} />
-            <SplitLargeBtn icon={ListOrdered} label="" items={[
-              { label: 'None' },
-              { label: '1. 2. 3.' },
-              { label: 'a. b. c.' },
-              { label: 'I. II. III.' },
-              { label: 'A. B. C.' },
-              { divider: true },
-              { label: 'Define New Format...' },
-            ]} />
+        <div className="flex flex-col gap-0.5">
+          <div className="flex items-center gap-0">
+            <SmallBtn icon={List} title="Bullets" />
+            <SmallBtn icon={ListOrdered} title="Numbering" />
             <SmallBtn icon={IndentDecrease} title="Decrease Indent" />
             <SmallBtn icon={IndentIncrease} title="Increase Indent" />
             <RibbonDivider />
             <SmallBtn icon={SortAsc} title="Sort" />
-            <SmallBtn icon={Pilcrow} title="Show/Hide Formatting Marks" />
+            <SmallBtn icon={Pilcrow} title="Show/Hide" />
           </div>
-          <div className="flex items-center gap-0.5">
-            <SmallBtn icon={AlignLeft} title="Align Left (Ctrl+L)" />
-            <SmallBtn icon={AlignCenter} title="Center (Ctrl+E)" />
-            <SmallBtn icon={AlignRight} title="Align Right (Ctrl+R)" />
-            <SmallBtn icon={AlignJustify} title="Justify (Ctrl+J)" />
+          <div className="flex items-center gap-0">
+            <SmallBtn icon={AlignLeft} title="Align Left" />
+            <SmallBtn icon={AlignCenter} title="Center" />
+            <SmallBtn icon={AlignRight} title="Align Right" />
+            <SmallBtn icon={AlignJustify} title="Justify" />
             <RibbonDivider />
-            <SplitLargeBtn icon={BetweenHorizonalEnd} label="" items={[
-              { label: '1.0' },
-              { label: '1.15' },
-              { label: '1.5' },
-              { label: '2.0' },
-              { label: '2.5' },
-              { label: '3.0' },
-              { divider: true },
-              { label: 'Line Spacing Options...' },
-              { label: 'Add Space Before Paragraph' },
-              { label: 'Remove Space After Paragraph' },
-            ]} />
-            <ColorPickerBtn icon={BetweenVerticalEnd} label="" title="Shading Color" />
+            <SmallBtn icon={BetweenHorizonalEnd} title="Line Spacing" />
+            <ColorPickerBtn icon={BetweenVerticalEnd} label="" title="Shading" />
           </div>
         </div>
       </RibbonGroup>
 
-      {/* STYLES */}
+      {/* Styles */}
       <RibbonGroup label="Styles">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 overflow-hidden">
           {[
             { name: 'Normal', preview: 'AaBbCc', style: '' },
-            { name: 'No Spacing', preview: 'AaBbCc', style: 'tracking-tight' },
             { name: 'Heading 1', preview: 'AaBbCc', style: 'font-bold text-blue-700' },
             { name: 'Heading 2', preview: 'AaBbCc', style: 'font-bold text-blue-500' },
-            { name: 'Title', preview: 'AaBbCc', style: 'font-bold text-gray-900 text-[12px]' },
-            { name: 'Subtitle', preview: 'AaBbCc', style: 'italic text-gray-500' },
+            { name: 'Title', preview: 'AaBbCc', style: 'font-bold' },
           ].map(s => (
-            <div key={s.name} className="border border-gray-200 rounded p-1 h-12 w-[60px] flex flex-col justify-between hover:bg-gray-50 hover:border-[#C9973A] cursor-pointer transition-colors">
-              <span className={`text-[10px] ${s.style}`}>{s.preview}</span>
-              <span className="text-[8px] text-gray-500 leading-tight">{s.name}</span>
+            <div key={s.name} className="border border-gray-200 rounded p-1 h-11 w-14 flex flex-col justify-between hover:bg-[#f3f2f1] hover:border-gray-300 cursor-pointer transition-colors flex-shrink-0 bg-white">
+              <span className={`text-[9px] ${s.style} leading-none truncate`}>{s.preview}</span>
+              <span className="text-[7.5px] text-gray-500 leading-none truncate">{s.name}</span>
             </div>
           ))}
-          <button className="flex items-center justify-center hover:bg-gray-100 rounded h-12 px-1 text-gray-500">
-            <div className="flex flex-col">
-              <ChevronDown size={12} />
-              <ChevronDown size={12} className="-mt-1" />
-            </div>
+          <button className="flex items-center justify-center hover:bg-[#f3f2f1] rounded h-11 w-5 text-gray-400">
+            <ChevronDown size={10} />
           </button>
         </div>
       </RibbonGroup>
 
-      {/* EDITING */}
+      {/* Editing */}
       <RibbonGroup label="Editing">
-        <SplitLargeBtn icon={Search} label="Find" items={[
-          { label: 'Find (Ctrl+F)' },
-          { label: 'Advanced Find...' },
-          { label: 'Go To... (Ctrl+G)' },
-        ]} />
-        <LargeBtn icon={Replace} label="Replace" />
-        <SplitLargeBtn icon={MousePointer2} label="Select" items={[
-          { label: 'Select All (Ctrl+A)' },
-          { label: 'Select Objects' },
-          { label: 'Select All Matching Text' },
-        ]} />
+        <div className="flex flex-col h-full justify-center gap-0">
+          <SmallBtn icon={Search} label="Find" />
+          <SmallBtn icon={Replace} label="Replace" />
+          <SmallBtn icon={MousePointer2} label="Select" />
+        </div>
         <LargeBtn icon={Keyboard} label="Keyboard" onClick={toggleKeyboard} active={isKeyboardOpen} />
       </RibbonGroup>
 

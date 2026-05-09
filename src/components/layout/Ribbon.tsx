@@ -14,15 +14,15 @@ const Ribbon: React.FC = () => {
   const { activeTab, setActiveTab } = useAppStore();
 
   const tabs = [
-    'HOME', 'INSERT', 'LAYOUT', 'REFERENCES', 
-    'SYNONYMS', 'GRAMMAR', 'DIALECT', 
-    'REVIEW', 'VIEW'
+    'Home', 'Insert', 'Layout', 'References', 
+    'Synonyms', 'Grammar', 'Dialect', 
+    'Review', 'View'
   ];
 
-  const sinhalaTabs = ['SYNONYMS', 'GRAMMAR', 'DIALECT'];
+  const sinhalaTabs = ['Synonyms', 'Grammar', 'Dialect'];
 
   const renderTabContent = () => {
-    switch (activeTab) {
+    switch (activeTab.toUpperCase()) {
       case 'HOME': return <HomeTab />;
       case 'INSERT': return <InsertTab />;
       case 'LAYOUT': return <LayoutTab />;
@@ -32,28 +32,28 @@ const Ribbon: React.FC = () => {
       case 'DIALECT': return <DialectTab />;
       case 'REVIEW': return <ReviewTab />;
       case 'VIEW': return <ViewTab />;
-      default: return <div className="flex items-center text-gray-400 text-sm px-4 italic">Tab content for {activeTab} is under development...</div>;
+      default: return <div className="flex items-center text-gray-400 text-xs px-4 italic">Content coming soon...</div>;
     }
   };
 
   return (
-    <div className="bg-white flex flex-col z-40 border-b border-gray-200 shadow-sm">
+    <div className="bg-white flex flex-col z-40 border-b border-gray-200 shadow-sm flex-shrink-0 select-none">
       {/* Tab Bar */}
-      <div className="flex px-4 border-b border-gray-100">
+      <div className="flex px-2 border-b border-gray-100 bg-[#f3f2f1] h-[30px] items-center">
         {tabs.map((tab) => {
           const isSinhala = sinhalaTabs.includes(tab);
-          const isActive = activeTab === tab;
+          const isActive = activeTab.toUpperCase() === tab.toUpperCase();
           
           return (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => setActiveTab(tab.toUpperCase())}
               className={`
-                px-4 py-2 text-[11px] font-semibold tracking-wide transition-all relative
-                ${isActive ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'}
+                px-3 h-full text-[11.5px] font-medium transition-all relative flex items-center justify-center
+                ${isActive ? 'bg-white text-gray-900 border-x border-t border-gray-200 rounded-t-sm -mb-px shadow-[0_-2px_4px_rgba(0,0,0,0.02)]' : 'text-gray-600 hover:bg-gray-200'}
               `}
             >
-              {tab}
+              <span className={isSinhala ? 'text-[#1A7A6E]' : ''}>{tab}</span>
               {isActive && (
                 <div 
                   className={`
@@ -68,8 +68,10 @@ const Ribbon: React.FC = () => {
       </div>
 
       {/* Ribbon Groups */}
-      <div className="h-[76px] px-4 bg-white flex overflow-x-auto no-scrollbar items-center">
-        {renderTabContent()}
+      <div className="h-[68px] px-2 bg-white flex overflow-x-auto no-scrollbar items-center">
+        <div className="flex h-full items-center">
+          {renderTabContent()}
+        </div>
       </div>
     </div>
   );
